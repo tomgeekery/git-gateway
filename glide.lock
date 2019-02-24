@@ -1,5 +1,5 @@
-hash: 584c9db44ed61e38b043e033cc12c9a6f229a5a91a110b1f4a69bf48f843e0f1
-updated: 2017-08-21T11:29:52.316754668-04:00
+hash: 836b806ddcae75553cf66bd0a55080f063fb4dedae017c7174e4937d5616c049
+updated: 2019-02-23T17:44:21.611612587-05:00
 imports:
 - name: cloud.google.com/go
   version: 06f11fffc537c4aef126d9fd3a92e2d7968f118f
@@ -7,12 +7,8 @@ imports:
   - compute/metadata
 - name: github.com/badoux/checkmail
   version: d0a759655d62bcdc95c50a0676f3e9702ed59453
-- name: github.com/davecgh/go-spew
-  version: 6d212800a42e8ab5c146b8ace3490ee17e5225f9
-  subpackages:
-  - spew
 - name: github.com/dgrijalva/jwt-go
-  version: d2709f9f1f31ebcda9651b03077758c1f3a0018c
+  version: 06ea1031745cb8b3dab3f6a236daf2b0aa468b7e
 - name: github.com/fsnotify/fsnotify
   version: 4da3e2cfbabc9f751898f250b49f2439785783a1
 - name: github.com/go-chi/chi
@@ -30,6 +26,7 @@ imports:
   subpackages:
   - logging
   - proxy/certs
+  - proxy/dialers/mysql
   - proxy/dialers/postgres
   - proxy/proxy
   - proxy/util
@@ -92,10 +89,6 @@ imports:
   version: 4692b8f9babfc93db58cc592ba2689d8736781de
 - name: github.com/pkg/errors
   version: 645ef00459ed84a119197bfb8d8205042c6df63d
-- name: github.com/pmezard/go-difflib
-  version: d8ed2627bdf02c080bf22230dbb337003b7aba2d
-  subpackages:
-  - difflib
 - name: github.com/rs/cors
   version: 8dd4211afb5d08dbb39a533b9bb9e4b486351df6
 - name: github.com/rybit/nats_logrus_hook
@@ -144,7 +137,6 @@ imports:
   version: eb71ad9bd329b5ac0fd0148dd99bd62e8be8e035
   subpackages:
   - bcrypt
-  - blowfish
 - name: golang.org/x/net
   version: 1c05540f6879653db88113bc4a2b70aec4bd491f
   subpackages:
@@ -187,8 +179,6 @@ imports:
   - internal/remote_api
   - internal/urlfetch
   - urlfetch
-- name: gopkg.in/alexcesaro/quotedprintable.v3
-  version: 2caba252f4dc53eaf6b553000885530023f54623
 - name: gopkg.in/gomail.v2
   version: 41f3572897373c5538c50a2402db15db079fa4fd
 - name: gopkg.in/logfmt.v0
@@ -197,12 +187,17 @@ imports:
   version: 3f83fa5005286a7fe593b055f0d7771a7dce4655
   subpackages:
   - bson
-  - internal/json
-  - internal/sasl
-  - internal/scram
   - txn
 - name: gopkg.in/stack.v1
   version: 817915b46b97fd7bb80e8ab6b69f01a53ac3eebf
 - name: gopkg.in/yaml.v2
   version: eb3733d160e74a9c7e442f435eb3bea458e1d19f
-testImports: []
+testImports:
+- name: github.com/davecgh/go-spew
+  version: 6d212800a42e8ab5c146b8ace3490ee17e5225f9
+  subpackages:
+  - spew
+- name: github.com/pmezard/go-difflib
+  version: d8ed2627bdf02c080bf22230dbb337003b7aba2d
+  subpackages:
+  - difflib

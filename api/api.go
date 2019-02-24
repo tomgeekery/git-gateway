@@ -72,7 +72,6 @@ func NewAPIWithVersion(ctx context.Context, globalConfig *conf.GlobalConfigurati
 
 	r.Route("/", func(r *router) {
 		if globalConfig.MultiInstanceMode {
-			r.Use(api.loadJWSSignatureHeader)
 			r.Use(api.loadInstanceConfig)
 		}
 		r.With(api.requireAuthentication).Mount("/github", NewGitHubGateway())

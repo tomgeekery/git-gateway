@@ -2,10 +2,11 @@ package api
 
 import (
 	"context"
+	"github.com/netlify/git-gateway/models"
 	"net/http"
 
 	"github.com/dgrijalva/jwt-go"
-	"github.com/netlify/git-gateway/models"
+	//"github.com/netlify/git-gateway/models"
 )
 
 const (
@@ -31,18 +32,18 @@ func (a *API) loadJWSSignatureHeader(w http.ResponseWriter, r *http.Request) (co
 func (a *API) loadInstanceConfig(w http.ResponseWriter, r *http.Request) (context.Context, error) {
 	ctx := r.Context()
 
-	signature := getSignature(ctx)
-	if signature == "" {
-		return nil, badRequestError("Operator signature missing")
+	token, tokenError := a.extractBearerToken(w, r)
+	if tokenError != nil {
+		return nil, tokenError
 	}
 
 	claims := NetlifyMicroserviceClaims{}
 	p := jwt.Parser{ValidMethods: []string{jwt.SigningMethodHS256.Name}}
-	_, err := p.ParseWithClaims(signature, &claims, func(token *jwt.Token) (interface{}, error) {
-		return []byte(a.config.OperatorToken), nil
-	})
+
+	_, _, err := p.ParseUnverified(token, &claims)
+
 	if err != nil {
-		return nil, badRequestError("Operator microservice signature is invalid: %v", err)
+		return nil, err
 	}
 
 	instanceID := claims.InstanceID
